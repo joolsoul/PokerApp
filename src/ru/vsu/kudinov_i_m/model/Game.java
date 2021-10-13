@@ -14,9 +14,11 @@ public class Game
 
     private Queue<Player> playersQueue;
 
-    private List<Card> gameDeck = new ArrayList<>();
+    private final List<Card> gameDeck = new ArrayList<>();
 
-    private Map<Player, Action> playerAction = new LinkedHashMap<>();
+    private Map<Player, ActionType> playerAction = new LinkedHashMap<>();
+
+    private int bank;
 
 
 
@@ -45,11 +47,6 @@ public class Game
         this.stepMap = stepMap;
     }
 
-    public Queue<Player> getStepPlayersQueue()
-    {
-        return playersQueue;
-    }
-
     public Map<Player, List<Card>> getPlayerHandCards()
     {
         return playerHandCards;
@@ -60,19 +57,9 @@ public class Game
         this.playerHandCards = playerHandCards;
     }
 
-    public void setStepPlayersQueue(Queue<Player> stepPlayersQueue)
-    {
-        this.playersQueue = stepPlayersQueue;
-    }
-
     public List<Card> getGameDeck()
     {
         return gameDeck;
-    }
-
-    public void setGameDeck(List<Card> gameDeck)
-    {
-        this.gameDeck = gameDeck;
     }
 
     public Map<Player, Combination> getPlayerCombination()
@@ -95,13 +82,23 @@ public class Game
         this.playersQueue = playersQueue;
     }
 
-    public Map<Player, Action> getPlayerAction()
+    public Map<Player, ActionType> getPlayerAction()
     {
         return playerAction;
     }
 
-    public void setPlayerAction(Map<Player, Action> playerAction)
+    public void setPlayerAction(Map<Player, ActionType> playerAction)
     {
         this.playerAction = playerAction;
+    }
+
+    public int getBank()
+    {
+        return bank;
+    }
+
+    public void setBank(int bank)
+    {
+        this.bank = bank;
     }
 }

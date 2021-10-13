@@ -1,13 +1,14 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.combination;
 
 import ru.vsu.kudinov_i_m.model.Card;
 import ru.vsu.kudinov_i_m.model.CardRank;
+import ru.vsu.kudinov_i_m.service.combination.ICombinationService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ThreeOfAKindCombinationService implements ICombinationService
+public class PairCombinationService implements ICombinationService
 {
 
     @Override
@@ -20,7 +21,7 @@ public class ThreeOfAKindCombinationService implements ICombinationService
 
         for (Map.Entry<CardRank, Integer> entry : ranksMap.entrySet())
         {
-            if(entry.getValue().equals(3))
+            if(entry.getValue().equals(2))
             {
                 combinationRank = entry.getKey();
             }

@@ -1,4 +1,4 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.card;
 
 import ru.vsu.kudinov_i_m.model.Card;
 

@@ -4,6 +4,14 @@ public class Player
 {
     private String name;
 
+    private int balance;
+
+    public Player(String name, int balance)
+    {
+        this.name = name;
+        this.balance = balance;
+    }
+
     public Player(String name)
     {
         this.name = name;
@@ -17,6 +25,16 @@ public class Player
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public int getBalance()
+    {
+        return balance;
+    }
+
+    public void setBalance(int balance)
+    {
+        this.balance = balance;
     }
 
     @Override

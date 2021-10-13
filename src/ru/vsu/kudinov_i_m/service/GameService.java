@@ -1,12 +1,19 @@
 package ru.vsu.kudinov_i_m.service;
 
 import ru.vsu.kudinov_i_m.model.*;
+import ru.vsu.kudinov_i_m.service.action.*;
+import ru.vsu.kudinov_i_m.service.card.CardsDistributorService;
+import ru.vsu.kudinov_i_m.service.card.GameDeckService;
+import ru.vsu.kudinov_i_m.service.card.HandComparatorService;
+import ru.vsu.kudinov_i_m.service.combination.*;
 
 import java.util.*;
 
 public class GameService
 {
     private Map<CombinationType, ICombinationService> combinationServiceMap;
+
+    private Map<ActionType, IActionService> stepServiceMap;
 
 
     public GameService()
@@ -22,6 +29,13 @@ public class GameService
         combinationServiceMap.put(CombinationType.TWO_PAIRS, new TwoPairsCombinationService());
         combinationServiceMap.put(CombinationType.PAIR, new PairCombinationService());
         combinationServiceMap.put(CombinationType.HIGH_CARD, new HighCardCombinationService());
+
+        stepServiceMap = new LinkedHashMap<>();
+        stepServiceMap.put(ActionType.BET, new BetActionService());
+        stepServiceMap.put(ActionType.CALL, new CallActionService());
+        stepServiceMap.put(ActionType.CHECK, new CheckActionService());
+        stepServiceMap.put(ActionType.FOLD, new FoldActionService());
+        stepServiceMap.put(ActionType.RAISE, new RaiseActionService());
     }
 
     public Game createGame(Queue<Player> playersQueue)
@@ -35,26 +49,30 @@ public class GameService
     public void playGame(Game game)
     {
         CardsDistributorService cardsDistributorService = new CardsDistributorService();
-        game.setPlayerHandCards(cardsDistributorService.distributePlayersStartCards(game.getStepPlayersQueue(), game.getGameDeck()));
+        game.setPlayerHandCards(cardsDistributorService.distributePlayersStartCards(game.getStepMap(), game.getPlayersQueue(), game.getGameDeck()));
         cardsDistributorService.distributeFlopCards(game.getStepMap(), game.getGameDeck());
         cardsDistributorService.addTurnCard(game.getStepMap(), game.getGameDeck());
         cardsDistributorService.addRiverCard(game.getStepMap(), game.getGameDeck());
 
+        System.out.println("Hand cards:");
         System.out.println(game.getStepMap().get(StepType.RIVER).toString());
-        for(Map.Entry<Player, List<Card>> entry : game.getPlayerHandCards().entrySet())
+        System.out.println();
+        System.out.println("Players cards:");
+        for (Map.Entry<Player, List<Card>> entry : game.getPlayerHandCards().entrySet())
         {
             System.out.println(entry.getKey().getName() + entry.getValue().toString());
         }
+        System.out.println();
 
         game.setPlayerCards(getPlayerCards(game.getPlayerHandCards(), game.getStepMap(), StepType.RIVER));
         game.setPlayerCombination(getPlayerCombination(game.getPlayerCards()));
 
         List<Map.Entry<Player, Combination>> winner = getWinner(game);
+        System.out.println("Winner:");
         System.out.println(winner.toString());
-
     }
 
-    public List<Map.Entry<Player, Combination>> getWinner(Game game)
+    private  List<Map.Entry<Player, Combination>> getWinner(Game game)
     {
         List<Map.Entry<Player, Combination>> winnerList = new ArrayList<>(game.getPlayerCombination().entrySet());
 
@@ -113,7 +131,11 @@ public class GameService
         return null;
     }
 
-
+    private static int getRandom(int min, int max)
+    {
+        max -= min;
+        return (int) (Math.random() * ++max) + min;
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.combination;
 
 import ru.vsu.kudinov_i_m.model.Card;
 
@@ -16,19 +16,19 @@ public class StraightFlushCombinationService implements ICombinationService
         {
             boolean isFlush = true;
 
-                for(int i = 0; i < straightCombination.size(); i++)
+            for(int i = 0; i < straightCombination.size(); i++)
+            {
+                if(i != straightCombination.size() - 1 && straightCombination.get(i).getSuit() != straightCombination.get(i + 1).getSuit())
                 {
-                    if(i != straightCombination.size() - 1 && straightCombination.get(i).getSuit() != straightCombination.get(i + 1).getSuit())
-                    {
-                        isFlush = false;
-                        break;
-                    }
+                    isFlush = false;
+                    break;
                 }
+            }
 
-                if(isFlush)
-                {
-                    return new ArrayList<>(straightCombination);
-                }
+            if(isFlush)
+            {
+                return new ArrayList<>(straightCombination);
+            }
         }
         return new ArrayList<>();
     }

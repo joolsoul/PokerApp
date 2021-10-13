@@ -1,9 +1,10 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.card;
 
 import ru.vsu.kudinov_i_m.model.Card;
 import ru.vsu.kudinov_i_m.model.Combination;
 import ru.vsu.kudinov_i_m.model.CombinationType;
 import ru.vsu.kudinov_i_m.model.Player;
+import ru.vsu.kudinov_i_m.service.card.CardComparatorService;
 
 import java.util.Comparator;
 import java.util.List;

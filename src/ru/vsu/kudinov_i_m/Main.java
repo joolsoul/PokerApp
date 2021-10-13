@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args)
     {
         Player p1 = new Player("Ivan");
-        Player p2 = new Player("Nadya");
+        Player p2 = new Player("Yaroslav");
 
         Queue<Player> playerQueue = new LinkedList<>();
         playerQueue.add(p1);

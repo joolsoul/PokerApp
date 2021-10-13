@@ -1,4 +1,4 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.combination;
 
 import ru.vsu.kudinov_i_m.model.Card;
 import ru.vsu.kudinov_i_m.model.CardRank;
@@ -16,7 +16,6 @@ public class FlushCombinationService implements ICombinationService
     public List<Card> checkCombination(List<Card> playerHandCards)
     {
         sort(playerHandCards);
-        Map<CardRank, Integer> ranksMap = fillRanksMap(playerHandCards);
         List<Card> combination = new ArrayList<>();
 
         CardSuit suitHighestCard = null;
@@ -51,7 +50,7 @@ public class FlushCombinationService implements ICombinationService
 
         if(suitHighestCard != null)
         {
-            for (int i = playerHandCards.size() - 1, cardCounter = 0; cardCounter < 6 && i > -1; i--)
+            for (int i = playerHandCards.size() - 1, cardCounter = 0; cardCounter < 5 && i > -1; i--)
             {
                 if (playerHandCards.get(i).getSuit() == suitHighestCard)
                 {

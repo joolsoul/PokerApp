@@ -1,8 +1,9 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.combination;
 
 import ru.vsu.kudinov_i_m.model.Card;
 import ru.vsu.kudinov_i_m.model.CardRank;
 import ru.vsu.kudinov_i_m.model.CardSuit;
+import ru.vsu.kudinov_i_m.service.combination.ICombinationService;
 
 import java.util.ArrayList;
 import java.util.List;

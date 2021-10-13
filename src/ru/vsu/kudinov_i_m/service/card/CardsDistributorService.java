@@ -1,4 +1,4 @@
-package ru.vsu.kudinov_i_m.service;
+package ru.vsu.kudinov_i_m.service.card;
 
 import ru.vsu.kudinov_i_m.model.Card;
 import ru.vsu.kudinov_i_m.model.Player;
@@ -9,7 +9,7 @@ import java.util.*;
 public class CardsDistributorService
 {
 
-    public Map<Player, List<Card>> distributePlayersStartCards(Queue<Player> stepPlayersQueue, List<Card> gameDeck)
+    public Map<Player, List<Card>> distributePlayersStartCards(Map<StepType, List<Card>> stepMap, Queue<Player> stepPlayersQueue, List<Card> gameDeck)
     {
         Map<Player, List<Card>> playerCards = new LinkedHashMap<>();
 
@@ -24,6 +24,7 @@ public class CardsDistributorService
 
             stepPlayersQueue.add(currentPlayer);
         }
+        stepMap.put(StepType.PRE_FLOP, new ArrayList<>());
         return playerCards;
     }
 
